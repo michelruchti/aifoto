@@ -12,7 +12,8 @@ Unleash your creativity and create your unique images with the help of advanced 
 - SvelteKit
 - Tailwind
 - Flowbite (Flowbite-Svelte)
-- Replicate API
+- Replicate API for AI generation
+- Hosted on Netlify
 
 ## Running locally
 
