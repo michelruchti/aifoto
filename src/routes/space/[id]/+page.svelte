@@ -140,8 +140,13 @@
 								<!-- <span> <DocumentDuplicate class="w-4 h-4 " /></span>-->
 							</div>
 
-							<div>
+							<div class="flex justify-between">
 								<Badge time={shot.created_at} />
+								<div class="flex space-x-2">
+									<FlowBadge color="dark">Copy prompt</FlowBadge><FlowBadge color="dark"
+										>Rrecreate</FlowBadge
+									>
+								</div>
 							</div>
 						</div>
 					</div>

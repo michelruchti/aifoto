@@ -5,7 +5,7 @@
 	import { supabase } from '$lib/clients/supabase';
 	import { PUBLIC_SERVER_URL } from '$env/static/public';
 
-	let email = 'michel@ruchti.co';
+	let email = '';
 	let loading = false;
 	let mailSent = false;
 

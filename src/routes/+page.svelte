@@ -1,6 +1,7 @@
 <script>
 	import { Button } from 'flowbite-svelte';
 	import { ArrowLongRight } from 'svelte-heros-v2';
+	import { page } from '$app/stores';
 </script>
 
 <section>
@@ -18,15 +19,13 @@
 				intelligence.
 			</p>
 
-			<a href="/login">
+			<a href={$page.data.session ? '/dashboard' : '/login'}>
 				<Button>Start creating now <ArrowLongRight class="ml-2" /></Button>
 			</a>
 		</div>
-		<div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-			<img
-				src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
-				alt="mockup"
-			/>
+		<div class=" mt-16 lg:mt-0 lg:col-span-5 lg:flex">
+			<img src="/hero.png" alt="mockup" class="dark:hidden" />
+			<img src="/hero2.png" alt="mockup" class="hidden dark:block" />
 		</div>
 	</div>
 </section>
