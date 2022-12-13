@@ -3,7 +3,7 @@
 	import { ArrowLongRight, Clock } from 'svelte-heros-v2';
 	import toast from 'svelte-french-toast';
 	import FormPayment from './FormPayment.svelte';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_SUPABASE_URL } from '$env/static/public';
 	import dayjs from 'dayjs';
 	import relativeTime from 'dayjs/plugin/relativeTime';
 	dayjs.extend(relativeTime);
@@ -88,7 +88,7 @@
 		<div class="flex mb-5 mx-auto">
 			{#each space.image_urls as image}
 				<Avatar
-					src="{env.VITE_SUPABASE_URL}/storage/v1/object/public/images/{image}"
+					src="{PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/{image}"
 					stacked={space.image_urls.length > 1}
 				/>
 			{/each}

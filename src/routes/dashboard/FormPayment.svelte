@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_STRIPE_SPACE_PRICE } from '$env/static/public';
 	import { Button, Spinner } from 'flowbite-svelte';
 	import toast from 'svelte-french-toast';
 	import { CheckBadge } from 'svelte-heros-v2';
@@ -34,9 +34,7 @@
 
 <div class="flex justify-center items-end space-x-2 ">
 	<p class="text-6xl font-extrabold">
-		${env.VITE_PUBLIC_STRIPE_SPACE_PRICE}<span class="text-gray-600 font-medium text-lg "
-			>/ space</span
-		>
+		${PUBLIC_STRIPE_SPACE_PRICE}<span class="text-gray-600 font-medium text-lg ">/ space</span>
 	</p>
 </div>
 <span class="text-lg font-medium mt-4">Your Model is ready to be trained!</span>
@@ -60,9 +58,7 @@
 
 <div class="my-6">
 	{#if !loadingPayment}
-		<Button size="lg" on:click={handlePayment}
-			>Unlock now - ${env.VITE_PUBLIC_STRIPE_SPACE_PRICE}</Button
-		>
+		<Button size="lg" on:click={handlePayment}>Unlock now - ${PUBLIC_STRIPE_SPACE_PRICE}</Button>
 	{:else}
 		<Button size="lg" disabled
 			><Spinner class="mr-3" size="5" color="white" />Loading payment</Button

@@ -1,7 +1,7 @@
 import { error, json } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { SECRET_STRIPE_KEY } from '$env/static/private';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_STRIPE_SPACE_PRICE, PUBLIC_SERVER_URL } from '$env/static/public';
 
 import Stripe from 'stripe';
 const stripe = new Stripe(SECRET_STRIPE_KEY, {
@@ -24,7 +24,7 @@ export async function POST(event) {
 				{
 					price_data: {
 						currency: 'usd',
-						unit_amount: Number(env.VITE_PUBLIC_STRIPE_SPACE_PRICE) * 100,
+						unit_amount: Number(PUBLIC_STRIPE_SPACE_PRICE) * 100,
 						product_data: {
 							name: 'AI model training + 100 shots'
 						}
@@ -33,8 +33,8 @@ export async function POST(event) {
 				}
 			],
 			mode: 'payment',
-			success_url: `${env.VITE_PUBLIC_SERVER_URL}/dashboard?session_id={CHECKOUT_SESSION_ID}&space_id=${space_id}`,
-			cancel_url: `${env.VITE_PUBLIC_SERVER_URL}/dashboard`
+			success_url: `${PUBLIC_SERVER_URL}/dashboard?session_id={CHECKOUT_SESSION_ID}&space_id=${space_id}`,
+			cancel_url: `${PUBLIC_SERVER_URL}/dashboard`
 		});
 
 		return new json({ url: stripeSession.url });

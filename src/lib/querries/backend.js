@@ -1,9 +1,9 @@
 import { error as err } from '@sveltejs/kit';
 import { createClient } from '@supabase/supabase-js';
 import { SECRET_SUPABASE_KEY } from '$env/static/private';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_SUPABASE_URL } from '$env/static/public';
 
-const supabase = createClient(env.VITE_SUPABASE_URL, SECRET_SUPABASE_KEY);
+const supabase = createClient(PUBLIC_SUPABASE_URL, SECRET_SUPABASE_KEY);
 
 export const getSpace = async (spaceId, userId) => {
 	const { data, error } = await supabase

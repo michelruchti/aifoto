@@ -2,7 +2,7 @@ import JSZip from 'jszip';
 import sharp from 'sharp';
 import smartcrop from 'smartcrop-sharp';
 import { storageClient } from '$lib/clients/storage';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_SUPABASE_URL } from '$env/static/public';
 
 const zip = new JSZip();
 
@@ -14,7 +14,7 @@ export const createZip = async (urls, spacecId) => {
 		const responses = await Promise.all(
 			urls.map(async (url) => {
 				const response = await fetch(
-					`${env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${url}`
+					`${PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${url}`
 				);
 				const arrayBuffer = await response.arrayBuffer();
 				return new Uint8Array(arrayBuffer);
