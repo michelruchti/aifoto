@@ -1,3 +1,7 @@
+![Screenshot](./screenshot.png)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/
+8831d402-d51a-45e7-b86a-c6c953156a16/deploy-status)](https://app.netlify.com/sites/cowofi/deploys)
+
 # AI Foto
 
 ## Create your own AI-generated fotos
