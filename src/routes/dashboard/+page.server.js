@@ -2,10 +2,10 @@ import { error } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { createClient } from '@supabase/supabase-js';
 import { SECRET_SUPABASE_KEY, SECRET_STRIPE_KEY } from '$env/static/private';
-import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { VITE_PUBLIC_SUPABASE_URL } from '$env/static/public';
 import Stripe from 'stripe';
 
-const supabase = createClient(PUBLIC_SUPABASE_URL, SECRET_SUPABASE_KEY);
+const supabase = createClient(VITE_PUBLIC_SUPABASE_URL, SECRET_SUPABASE_KEY);
 
 const stripe = new Stripe(SECRET_STRIPE_KEY, {
 	apiVersion: '2022-11-15'
