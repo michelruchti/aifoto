@@ -1,5 +1,6 @@
 ![Screenshot](./screenshot.png)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8831d402-d51a-45e7-b86a-c6c953156a16/deploy-status)](https://app.netlify.com/sites/aifoto/deploys)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8831d402-d51a-45e7-b86a-c6c953156a16/deploy-status)](https://app.netlify.com/sites/aifoto/deploys) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license: MIT">
 
 # AI Foto
 
