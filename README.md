@@ -4,6 +4,13 @@
 
 Unleash your creativity and create your unique images with the help of advanced artificial intelligence.
 
+## Demo
+
+Check the web app 👉
+[https://aifoto.netlify.app](https://aifoto.netlify.app)
+
+Use coupon code **SUPAHACK30** for 30% Supabase hackathon discount.
+
 ## Tech stack
 
 - Supabase Authentication
