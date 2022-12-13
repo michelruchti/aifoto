@@ -27,7 +27,7 @@ export async function POST(event) {
 		body: JSON.stringify({
 			version: '0c4346ba56ec4c989787f7c5486b223cb6f2c35b0e6225b84467cd69932cc677',
 			input: { prompt },
-			webhook_completed: `${env.PUBLIC_SERVER_URL}/callback/prediction_completed`
+			webhook_completed: `${env.VITE_PUBLIC_SERVER_URL}/callback/prediction_completed`
 		})
 	});
 	if (!response.ok) throw error;

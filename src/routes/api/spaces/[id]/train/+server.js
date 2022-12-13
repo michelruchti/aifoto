@@ -28,13 +28,13 @@ export async function POST(event) {
 			input: {
 				instance_prompt: `a photo of a ${space.instance_name} ${space.instance_class}`,
 				class_prompt: `a photo of a ${space.instance_class}`,
-				instance_data: `${env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${space.user_id}/${space.id}.zip`,
+				instance_data: `${env.VITE_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${space.user_id}/${space.id}.zip`,
 				max_train_steps: 2000
 				//	num_class_images: 50,
 				//	learning_rate: 1e-6
 			},
 			model: `${SECRET_REPLICATE_USERNAME}/${space.id}`,
-			webhook_completed: `${env.PUBLIC_SERVER_URL}/callback/model_completed`
+			webhook_completed: `${env.VITE_PUBLIC_SERVER_URL}/callback/model_completed`
 		})
 	});
 	if (!response.ok) throw error;

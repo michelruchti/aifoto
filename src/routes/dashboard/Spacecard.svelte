@@ -88,7 +88,7 @@
 		<div class="flex mb-5 mx-auto">
 			{#each space.image_urls as image}
 				<Avatar
-					src="{env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/{image}"
+					src="{env.VITE_SUPABASE_URL}/storage/v1/object/public/images/{image}"
 					stacked={space.image_urls.length > 1}
 				/>
 			{/each}

@@ -10,13 +10,13 @@
 	let mailSent = false;
 
 	const handleLogin = async () => {
-		console.log(env.PUBLIC_SERVER_URL + '/callback');
+		console.log(env.VITE_PUBLIC_SERVER_URL + '/callback');
 		try {
 			loading = true;
 
 			const { error } = await supabase.auth.signInWithOtp({
 				email,
-				options: { emailRedirectTo: env.PUBLIC_SERVER_URL + '/callback' }
+				options: { emailRedirectTo: env.VITE_PUBLIC_SERVER_URL + '/callback' }
 			});
 			if (error) throw error;
 			toast.success('Email was sent!');

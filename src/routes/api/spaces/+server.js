@@ -5,7 +5,7 @@ import { SECRET_SUPABASE_KEY } from '$env/static/private';
 import { env } from '$env/dynamic/public';
 import { createZip, uploadZip } from '$lib/utils/zip';
 
-const supabase = createClient(env.PUBLIC_SUPABASE_URL, SECRET_SUPABASE_KEY);
+const supabase = createClient(env.VITE_PUBLIC_SUPABASE_URL, SECRET_SUPABASE_KEY);
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST(event) {
@@ -20,7 +20,7 @@ export async function POST(event) {
 			model_status: 'not_created',
 			instance_name: instanceName.replace(/[^a-zA-Z0-9-]/g, ''),
 			instance_class: instanceClass || 'person',
-			credits: Number(env.PUBLIC_SHOT_AMOUNT) || 100
+			credits: Number(env.VITE_PUBLIC_SHOT_AMOUNT) || 100
 		})
 		.select()
 		.single();

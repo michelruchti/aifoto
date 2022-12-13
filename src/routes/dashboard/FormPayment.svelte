@@ -34,7 +34,9 @@
 
 <div class="flex justify-center items-end space-x-2 ">
 	<p class="text-6xl font-extrabold">
-		${env.PUBLIC_STRIPE_SPACE_PRICE}<span class="text-gray-600 font-medium text-lg ">/ space</span>
+		${env.VITE_PUBLIC_STRIPE_SPACE_PRICE}<span class="text-gray-600 font-medium text-lg "
+			>/ space</span
+		>
 	</p>
 </div>
 <span class="text-lg font-medium mt-4">Your Model is ready to be trained!</span>
@@ -58,7 +60,8 @@
 
 <div class="my-6">
 	{#if !loadingPayment}
-		<Button size="lg" on:click={handlePayment}>Unlock now - ${env.PUBLIC_STRIPE_SPACE_PRICE}</Button
+		<Button size="lg" on:click={handlePayment}
+			>Unlock now - ${env.VITE_PUBLIC_STRIPE_SPACE_PRICE}</Button
 		>
 	{:else}
 		<Button size="lg" disabled
