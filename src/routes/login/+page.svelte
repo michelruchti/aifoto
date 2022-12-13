@@ -3,19 +3,20 @@
 	import { PaperAirplane } from 'svelte-heros-v2';
 	import toast from 'svelte-french-toast';
 	import { supabase } from '$lib/clients/supabase';
+	import { env } from '$env/dynamic/public';
 
 	let email = 'michel@ruchti.co';
 	let loading = false;
 	let mailSent = false;
 
 	const handleLogin = async () => {
-		console.log(window.location.origin + '/dashboard');
+		console.log(env.PUBLIC_SERVER_URL + '/callback');
 		try {
 			loading = true;
 
 			const { error } = await supabase.auth.signInWithOtp({
 				email,
-				options: { emailRedirectTo: window.location.origin + '/callback' }
+				options: { emailRedirectTo: env.PUBLIC_SERVER_URL + '/callback' }
 			});
 			if (error) throw error;
 			toast.success('Email was sent!');

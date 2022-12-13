@@ -2,6 +2,7 @@ import JSZip from 'jszip';
 import sharp from 'sharp';
 import smartcrop from 'smartcrop-sharp';
 import { storageClient } from '$lib/clients/storage';
+import { env } from '$env/dynamic/public';
 
 const zip = new JSZip();
 

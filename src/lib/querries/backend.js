@@ -11,20 +11,20 @@ export const getSpace = async (spaceId, userId) => {
 		.select()
 		.eq('id', spaceId)
 		.eq('user_id', userId)
-		.eq('model_status', 'not_created')
-		.neq('stripe_payment_id', null);
+		.neq('stripe_payment_id', null)
+		.single();
 
 	if (error)
 		throw err(500, {
 			message: error.message
 		});
 
-	if (!data.length)
+	if (!data)
 		throw err(404, {
 			message: 'not found'
 		});
 
-	return data[0];
+	return data;
 };
 
 export const getSpaceWithShots = async (spaceId, userId) => {
@@ -34,19 +34,20 @@ export const getSpaceWithShots = async (spaceId, userId) => {
 		.eq('id', spaceId)
 		.eq('user_id', userId)
 		.eq('model_status', 'succeeded')
-		.neq('stripe_payment_id', null);
+		.neq('stripe_payment_id', null)
+		.single();
 
 	if (error)
 		throw err(500, {
 			message: error.message
 		});
 
-	if (!data.length)
+	if (!data)
 		throw err(404, {
 			message: 'not found'
 		});
 
-	return data[0];
+	return data;
 };
 
 export const updateSpace = async (spaceId, modelId) => {
@@ -83,4 +84,85 @@ export const trainingFinished = async (modelId, versionId) => {
 		});
 
 	return;
+};
+
+export const generateShot = async (space_id, prompt, replicate_id) => {
+	const { data, error } = await supabase
+		.from('shots')
+		.insert({
+			space_id,
+			prompt,
+			replicate_id,
+			status: 'processing'
+		})
+		.select()
+		.single();
+
+	if (error)
+		throw err(500, {
+			message: error.message
+		});
+
+	return data;
+};
+
+export const updateShot = async (replicateId, status, shot_url) => {
+	const { data, error } = await supabase
+		.from('shots')
+		.update({
+			status,
+			shot_url
+		})
+		.eq('replicate_id', replicateId)
+		.select()
+		.single();
+
+	if (error) {
+		console.log(error);
+		throw err(500, {
+			message: error.message
+		});
+	}
+
+	return data;
+};
+
+export const setCredits = async (spaceId, credits) => {
+	const { data, error } = await supabase
+		.from('spaces')
+		.update({
+			credits
+		})
+		.select()
+		.eq('id', spaceId)
+		.neq('stripe_payment_id', null)
+		.single();
+
+	if (error)
+		throw err(500, {
+			message: error.message
+		});
+
+	return;
+};
+
+export const getShot = async (spaceId, shotId) => {
+	const { data, error } = await supabase
+		.from('shots')
+		.select()
+		.eq('id', shotId)
+		.eq('space_id', spaceId)
+		.single();
+
+	if (error)
+		throw err(500, {
+			message: error.message
+		});
+
+	if (!data)
+		throw err(404, {
+			message: 'not found'
+		});
+
+	return data;
 };

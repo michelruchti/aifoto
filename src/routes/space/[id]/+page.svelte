@@ -3,13 +3,60 @@
 	import { DocumentDuplicate, Sparkles } from 'svelte-heros-v2';
 	import Badge from '$lib/components/Badge.svelte';
 	import { Lightbox } from 'svelte-lightbox';
+	import toast from 'svelte-french-toast';
 
 	export let data;
-	const space = data.space;
-	let prompt = '';
-	let imageModal = false;
 
-	const handleCreateShot = async () => {};
+	let space = data.space;
+	$: if (space?.shots?.length) {
+		space.shots = space.shots.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+		space = space;
+	}
+	let prompt = '';
+	let loading = false;
+
+	const handleCreateShot = async () => {
+		loading = true;
+
+		const response = await fetch(`/api/spaces/${space.id}/shots/generate`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				prompt
+			})
+		});
+
+		if (!response.ok) return toast.error('Something went wrong');
+		const json = await response.json();
+		space.shots.unshift(json.shot);
+		space.credits = json.credits;
+		space = space;
+		prompt = '';
+		toast.success('Prediction started');
+		handleShotUpdate(json.shot.id);
+		loading = false;
+	};
+
+	const getShotInfo = async (shotId) => {
+		const response = await fetch(`/api/spaces/${space.id}/shots/${shotId}`);
+		if (!response.ok) return toast.error('Something went wrong');
+		const shot = await response.json();
+		if (shot.status === 'succeeded') {
+			const objIndex = space.shots.findIndex((obj) => obj.id === shotId);
+			space.shots[objIndex] = shot;
+		}
+		return shot.status;
+	};
+
+	const handleShotUpdate = (shotId) => {
+		const interval = setInterval(async () => {
+			const shotStatus = await getShotInfo(shotId);
+			console.log(shotStatus);
+			if (shotStatus === 'succeeded') clearInterval(interval);
+		}, 2000);
+	};
 </script>
 
 <div
@@ -42,10 +89,17 @@
 					placeholder="Painting of {space.instance_name} by Vincent van Gogh"
 					required
 				/>
-
-				<Button type="submit" class="lg:w-32 w-full mt-2 lg:mt-0"
-					>Let's go <Sparkles class="ml-1 h-4 w-4" variation="solid" /></Button
-				>
+				<div class="w-full lg:w-36 mt-2 lg:mt-0">
+					{#if !loading}
+						<Button size="lg" class="w-full" type="submit"
+							>Let's go <Sparkles class="ml-1 h-4 w-4" variation="solid" /></Button
+						>
+					{:else}
+						<Button size="lg" disabled class="w-full"
+							><Spinner class="mr-2" size="5" color="white" />Starting</Button
+						>
+					{/if}
+				</div>
 			</div>
 		</form>
 
@@ -61,15 +115,21 @@
 					<Hr class="my-6" height="h-px" />
 					<div class="flex justify-between space-x-4">
 						<div class="w-32">
-							<button on:click={() => (imageModal = true)}>
+							{#if !shot.shot_url && shot.status === 'processing'}
+								<div
+									class="flex items-center h-24 w-24 rounded-lg border-2 border-white shadow-lg bg-gray-200 dark:bg-gray-700"
+								>
+									<Spinner color="gray" class="mx-auto" />
+								</div>
+							{:else}
 								<Lightbox>
 									<img
 										src={shot.shot_url}
 										class="object-cover h-24 w-24 rounded-lg border-2 border-white shadow-lg"
 										alt=""
 									/></Lightbox
-								></button
-							>
+								>
+							{/if}
 						</div>
 
 						<div class="w-full flex flex-col justify-between">

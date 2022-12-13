@@ -11,6 +11,7 @@
 	let files = [];
 	let urls = [];
 	let instanceName = '';
+
 	$: instanceName = instanceName.replace(/[^a-zA-Z0-9-]/g, '');
 	let instanceClass = 'man';
 	let state = 'upload'; // upload, uploading, uploaded
@@ -49,6 +50,7 @@
 	};
 
 	const handleCreateSpace = async () => {
+		state = 'creating';
 		try {
 			// save space
 			const response = await fetch('/api/spaces', {
@@ -74,6 +76,8 @@
 			instanceName = '';
 		} catch (error) {
 			toast.error('Something went wrong');
+		} finally {
+			loading = false;
 		}
 	};
 </script>
@@ -131,7 +135,7 @@
 	</div>
 {/if}
 
-{#if state === 'uploaded'}
+{#if state === 'uploaded' || state === 'creating'}
 	<div>
 		<form on:submit|preventDefault={handleCreateSpace}>
 			<div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -140,7 +144,13 @@
 				</div>
 				<div><Select items={instanceTypes} bind:value={instanceClass} /></div>
 				<div>
-					<Button type="submit">Create your space</Button>
+					{#if state === 'creating'}
+						<Button disabled
+							><Spinner class="mr-2" size="4" color="white" /> Creating space ...</Button
+						>
+					{:else}
+						<Button type="submit">Create your space</Button>
+					{/if}
 				</div>
 			</div>
 		</form>

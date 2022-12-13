@@ -43,9 +43,9 @@
 			</NavBrand>
 			<NavHamburger on:click={toggle} />
 			<NavUl {hidden}>
+				<DarkMode />
 				{#if $page.data.session}
 					<div class="flex items-center space-x-6">
-						<DarkMode />
 						<NavLi href="/dashboard"><Button>Dashboard</Button></NavLi>
 						<button
 							on:click={handleLogout}

@@ -44,7 +44,9 @@
 		{#if loading}
 			<Spinner color="gray" />
 		{:else}
-			<p class="text-gray-400 dark:text-gray-400 ">No spaces available yet</p>
+			<p class="text-gray-500 dark:text-gray-300 text-center">
+				No spaces available yet. <br /><strong>Start now</strong> by uploading some pictures.
+			</p>
 		{/if}
 	</div>
 {:else}

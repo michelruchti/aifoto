@@ -1,6 +1,8 @@
 import { error, json } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { getSpace, updateSpace } from '$lib/querries/backend';
+import { SECRET_REPLICATE_API_TOKEN, SECRET_REPLICATE_USERNAME } from '$env/static/private';
+import { env } from '$env/dynamic/public';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST(event) {
@@ -16,36 +18,30 @@ export async function POST(event) {
 				: space.instance_class;
          */
 
-	/**
-                 
-                
-		const response = await fetch('https://dreambooth-api-experimental.replicate.com/v1/trainings', {
-			method: 'POST',
-			headers: {
-				Authorization: `Token ${SECRET_REPLICATE_API_TOKEN}`,
-				'Content-Type': 'application/json'
+	const response = await fetch('https://dreambooth-api-experimental.replicate.com/v1/trainings', {
+		method: 'POST',
+		headers: {
+			Authorization: `Token ${SECRET_REPLICATE_API_TOKEN}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			input: {
+				instance_prompt: `a photo of a ${space.instance_name} ${space.instance_class}`,
+				class_prompt: `a photo of a ${space.instance_class}`,
+				instance_data: `${env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${space.user_id}/${space.id}.zip`,
+				max_train_steps: 2000
+				//	num_class_images: 50,
+				//	learning_rate: 1e-6
 			},
-			body: JSON.stringify({
-				input: {
-					instance_prompt: `a photo of a ${space.instance_name} ${space.instance_class}`,
-					class_prompt: `a photo of a ${space.instance_class}`,
-					instance_data: `${env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${space.user_id}/${space.id}.zip`,
-					max_train_steps: 2000
-					//	num_class_images: 50,
-					//	learning_rate: 1e-6
-				},
-				model: `${SECRET_REPLICATE_USERNAME}/${space.id}`,
-				webhook_completed: `${env.PUBLIC_SERVER_URL}/callback/model_completed`
-			})
-		});
-		if (!response.ok) throw error;
+			model: `${SECRET_REPLICATE_USERNAME}/${space.id}`,
+			webhook_completed: `${env.PUBLIC_SERVER_URL}/callback/model_completed`
+		})
+	});
+	if (!response.ok) throw error;
 
-		const json = await response.json();
-			await updateSession(spaceId, json.id);
+	const { id } = await response.json();
 
- */
-
-	await updateSpace(spaceId, 'bo5llbefjzgxjllupbq6o26nlu');
+	await updateSpace(spaceId, id);
 	return json({ status: 'success' });
 }
 
