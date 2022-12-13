@@ -28,7 +28,6 @@
 		"postcss": "^8.4.19",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
-		"prisma": "^4.7.1",
 		"smartcrop-sharp": "^2.0.6",
 		"stripe": "^11.3.0",
 		"superjson": "^1.12.0",

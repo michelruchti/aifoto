@@ -67,7 +67,7 @@
 	>
 		<div>© 2022 AI Foto</div>
 		<div class="flex justify-end space-x-2 items-center py-8">
-			<a href="/github" class="hover:text-gray-900">
+			<a href="https://github.com/michelruchti/aifoto" class="hover:text-gray-600">
 				<svg
 					stroke="currentColor"
 					fill="currentColor"
@@ -81,7 +81,7 @@
 					/></svg
 				></a
 			>
-			<a href="/twitter" class="hover:text-gray-900">
+			<a href="/twitter" class="hover:text-gray-600">
 				<svg
 					stroke="currentColor"
 					fill="currentColor"
