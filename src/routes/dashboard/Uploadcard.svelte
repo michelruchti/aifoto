@@ -108,7 +108,7 @@
 			<span class="font-semibold ">Click to upload</span> or drag and drop
 		</p>
 		<p class="text-gray-500 dark:text-gray-400 text-center">
-			Better with different angles: Face and right/left profiles
+			Upload between 10 - 20 images of your face with different angles. (right, left, profiles)
 		</p>
 	</Dropzone>
 {/if}
