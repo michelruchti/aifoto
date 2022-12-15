@@ -12,7 +12,7 @@ export async function POST(event) {
 	const { session } = await getSupabase(event);
 	const { urls, instanceName, instanceClass } = await event.request.json();
 
-	let sanitizedUrls = urls.slice(0, 30);
+	let sanitizedUrls = urls.slice(0, 25);
 
 	const { data, error } = await supabase
 		.from('spaces')
