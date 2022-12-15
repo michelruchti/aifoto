@@ -38,7 +38,7 @@
 		<Card img="/step1.png" reverse="true">
 			<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Step 1:</h5>
 			<p class="mb-3 font-normal text-gray-700 dark:text-gray-400 leading-tight">
-				Create your personal space and upload between 15 - 25 images of your face.
+				Create your personal space and upload between 10 - 20 images of your face.
 			</p>
 		</Card><Card img="/step2.png" reverse="true">
 			<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Step 2:</h5>
