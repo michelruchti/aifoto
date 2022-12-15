@@ -6,6 +6,7 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import OpenGraph from '$lib/components/OpenGraph.svelte';
 	import '../app.css';
 
 	const handleLogout = async () => {
@@ -31,6 +32,8 @@
 		};
 	});
 </script>
+
+<OpenGraph />
 
 <div class="max-w-5xl px-4 min-h-screen mx-auto flex flex-col justify-between">
 	<div>

@@ -16,8 +16,7 @@
 			<p
 				class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
 			>
-				Unleash your creativity and create your unique images with the help of advanced artificial
-				intelligence.
+				Create your unique images with the help of advanced artificial intelligence.
 			</p>
 
 			<a href={$page.data.session ? '/dashboard' : '/login'}>
@@ -33,7 +32,7 @@
 
 <section class=" max-w-screen-xl px-4 py-8 text-center">
 	<Heading tag="h2" customeSize="text-4xl font-extrabold mx-auto"
-		>Unleash your creativity and create your unique fotos.</Heading
+		>Release your creativity and create your unique fotos.</Heading
 	>
 	<div class="grid justify-items-center md:grid-cols-3 mt-6 gap-4">
 		<Card img="/step1.png" reverse="true">
