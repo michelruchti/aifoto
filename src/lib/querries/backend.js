@@ -11,7 +11,7 @@ export const getSpace = async (spaceId, userId, status) => {
 		.select()
 		.eq('id', spaceId)
 		.eq('user_id', userId)
-		.eq('status', status)
+		.eq('model_status', status)
 		.neq('stripe_payment_id', null)
 		.single();
 
