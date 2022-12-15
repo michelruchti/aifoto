@@ -48,12 +48,17 @@
 	</li>
 	<li class="flex space-x-2 items-center mb-2">
 		<div><CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /></div>
-		<span> <strong>100</strong> images generation (512x512 resolution)</span>
+		<span> <strong>100</strong> images)</span>
 	</li>
 	<li class="flex space-x-2 items-center ">
 		<div><CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /></div>
 
-		<span>Your Space will be deleted 24 hours after your credits are exhausted</span>
+		<span>512x512 pixel image resolution</span>
+	</li>
+	<li class="flex space-x-2 items-center ">
+		<div><CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /></div>
+
+		<span>Possibility to add additional credits</span>
 	</li>
 </ul>
 
