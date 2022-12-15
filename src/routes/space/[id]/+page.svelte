@@ -4,20 +4,20 @@
 	import Badge from '$lib/components/Badge.svelte';
 	import { Lightbox } from 'svelte-lightbox';
 	import toast from 'svelte-french-toast';
+	import { onMount } from 'svelte';
 
 	export let data;
-
 	let space = data.space;
+	let prompt = '';
+	let loading = false;
+
 	$: if (space?.shots?.length) {
 		space.shots = space.shots.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 		space = space;
 	}
-	let prompt = '';
-	let loading = false;
 
 	const handleCreateShot = async () => {
 		loading = true;
-
 		const response = await fetch(`/api/spaces/${space.id}/shots/generate`, {
 			method: 'POST',
 			headers: {
@@ -31,11 +31,11 @@
 		if (!response.ok) return toast.error('Something went wrong');
 		const json = await response.json();
 		space.shots.unshift(json.shot);
+		handleShotUpdate(json.shot.id);
 		space.credits = json.credits;
 		space = space;
 		prompt = '';
 		toast.success('Prediction started');
-		handleShotUpdate(json.shot.id);
 		loading = false;
 	};
 
@@ -53,10 +53,18 @@
 	const handleShotUpdate = (shotId) => {
 		const interval = setInterval(async () => {
 			const shotStatus = await getShotInfo(shotId);
-			console.log(shotStatus);
+
 			if (shotStatus === 'succeeded') clearInterval(interval);
 		}, 2000);
 	};
+
+	onMount(() => {
+		space.shots.forEach((el) => {
+			if (el.status === 'processing') {
+				handleShotUpdate(el.id);
+			}
+		});
+	});
 </script>
 
 <div

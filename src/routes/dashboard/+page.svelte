@@ -17,8 +17,8 @@
 			const { data, error } = await supabase
 				.from('spaces')
 				.select()
-				.order('stripe_payment_id', { ascending: true })
 				.order('created_at', { ascending: false });
+
 			if (error) throw error;
 			spaces = data;
 		} catch (error) {
