@@ -12,11 +12,13 @@ export async function POST(event) {
 	const { session } = await getSupabase(event);
 	const { urls, instanceName, instanceClass } = await event.request.json();
 
+	let sanitizedUrls = urls.slice(0, 30);
+
 	const { data, error } = await supabase
 		.from('spaces')
 		.insert({
 			user_id: session.user.id,
-			image_urls: urls,
+			image_urls: sanitizedUrls,
 			model_status: 'not_created',
 			instance_name: instanceName.replace(/[^a-zA-Z0-9-]/g, ''),
 			instance_class: instanceClass || 'person',
@@ -28,7 +30,7 @@ export async function POST(event) {
 	if (error) throw err(500, { error: error.message });
 
 	const space_id = data.id;
-	const zip = await createZip(urls, space_id);
+	const zip = await createZip(sanitizedUrls, space_id);
 	await uploadZip(zip, session.user.id, space_id);
 
 	if (error) throw error;
