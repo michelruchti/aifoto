@@ -1,10 +1,8 @@
 <script>
 	import { Heading } from 'flowbite-svelte';
-
 	import Uploadcard from './Uploadcard.svelte';
-
 	import { supabase } from '$lib/clients/supabase';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { Spinner } from 'flowbite-svelte';
 	import toast from 'svelte-french-toast';
 	import Spacecard from './Spacecard.svelte';
@@ -30,9 +28,13 @@
 		}
 	};
 
+	let interval;
 	onMount(() => {
 		getSpaces();
+		interval = setInterval(() => getSpaces(), 60 * 1000);
 	});
+
+	onDestroy(() => clearInterval(interval));
 </script>
 
 <Heading tag="h4" class="mb-4">Create a new Space</Heading>

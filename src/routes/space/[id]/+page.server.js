@@ -1,4 +1,3 @@
-import { error } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { getSpaceWithShots } from '$lib/querries/backend';
 

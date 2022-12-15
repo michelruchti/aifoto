@@ -12,11 +12,11 @@ export async function POST(event) {
 	const spaceId = await event.params.id;
 	const { prompt } = await event.request.json();
 	const space = await getSpace(spaceId, session.user.id, 'succeeded');
+
 	if (space.credits === 0)
 		throw err(401, {
 			message: 'no credits'
 		});
-	// generate
 
 	const response = await fetch('https://api.replicate.com/v1/predictions', {
 		method: 'POST',
@@ -30,16 +30,13 @@ export async function POST(event) {
 			webhook_completed: `${PUBLIC_SERVER_URL}/callback/prediction_completed`
 		})
 	});
+
 	if (!response.ok) throw error;
 
 	const data = await response.json();
-
 	const shot = await generateShot(spaceId, prompt, data.id);
 	let credits = space.credits - 1;
-
 	await setCredits(spaceId, credits);
 
 	return json({ shot, credits });
 }
-
-//Painting of Michel by andy warhol

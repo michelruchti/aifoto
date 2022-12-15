@@ -26,5 +26,6 @@ export async function load({ url }) {
 			.update({ stripe_payment_id: stripeSession.id })
 			.eq('id', spaceId);
 	}
+
 	return;
 }

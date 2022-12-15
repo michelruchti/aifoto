@@ -26,11 +26,12 @@ export async function POST(event) {
 		.single();
 
 	if (error) throw err(500, { error: error.message });
+
 	const space_id = data.id;
 	const zip = await createZip(urls, space_id);
-
 	await uploadZip(zip, session.user.id, space_id);
 
 	if (error) throw error;
+
 	return json({ space_id });
 }

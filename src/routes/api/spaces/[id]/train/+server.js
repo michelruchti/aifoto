@@ -8,16 +8,7 @@ import { PUBLIC_SERVER_URL, PUBLIC_SUPABASE_URL } from '$env/static/public';
 export async function POST(event) {
 	const { session } = await getSupabase(event);
 	const spaceId = await event.params.id;
-
 	const space = await getSpace(spaceId, session.user.id, 'not_created');
-
-	/**
-         	const instanceClass =
-			space.instance_class === 'man' || space.instance_class === 'woman'
-				? 'person'
-				: space.instance_class;
-         */
-
 	const response = await fetch('https://dreambooth-api-experimental.replicate.com/v1/trainings', {
 		method: 'POST',
 		headers: {
@@ -30,18 +21,17 @@ export async function POST(event) {
 				class_prompt: `a photo of a ${space.instance_class}`,
 				instance_data: `${PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${space.user_id}/${space.id}.zip`,
 				max_train_steps: 2000
-				//	num_class_images: 50,
-				//	learning_rate: 1e-6
 			},
 			model: `${SECRET_REPLICATE_USERNAME}/${space.id}`,
 			webhook_completed: `${PUBLIC_SERVER_URL}/callback/model_completed`
 		})
 	});
+
 	if (!response.ok) throw error;
 
 	const { id } = await response.json();
-
 	await updateSpace(spaceId, id);
+
 	return json({ status: 'success' });
 }
 
