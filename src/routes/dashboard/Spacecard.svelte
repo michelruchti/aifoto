@@ -11,6 +11,7 @@
 	export let space;
 
 	let loadingTraining = false;
+	let processing = false;
 
 	const handleModelTrain = async () => {
 		loadingTraining = true;
@@ -25,6 +26,7 @@
 			});
 
 			if (!response.ok) return toast.error('Something went wrong');
+			processing = true;
 			toast.success('Training successfully started');
 		} catch (error) {
 			toast.error('Something went wrong');
@@ -64,12 +66,10 @@
 					>Open space <ArrowLongRight class="ml-2" /></Button
 				>
 			</div>
-		{:else if space.stripe_payment_id && space.model_status === 'processing'}
+		{:else if processing || space.model_status === 'processing'}
 			<div class="mt-4"><Spinner class="" size="12" color="white" /></div>
 			<p class="text-lg font-medium mt-8">Training of <b>your custom model</b> in progress!</p>
-			<span class="font-medium text-gray-500 mb-8"
-				>This step usually takes between 20 and 25 minutes.</span
-			>
+			<span class="font-medium text-gray-500 mb-8">This step usually takes ~20 minutes.</span>
 		{:else if space.stripe_payment_id}
 			<span class="text-lg font-medium mt-4">Your Model is ready to be trained!</span>
 			<div class="my-6">

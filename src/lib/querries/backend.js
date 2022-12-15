@@ -5,12 +5,13 @@ import { PUBLIC_SUPABASE_URL } from '$env/static/public';
 
 const supabase = createClient(PUBLIC_SUPABASE_URL, SECRET_SUPABASE_KEY);
 
-export const getSpace = async (spaceId, userId) => {
+export const getSpace = async (spaceId, userId, status) => {
 	const { data, error } = await supabase
 		.from('spaces')
 		.select()
 		.eq('id', spaceId)
 		.eq('user_id', userId)
+		.eq('status', status)
 		.neq('stripe_payment_id', null)
 		.single();
 

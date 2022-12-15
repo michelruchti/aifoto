@@ -9,7 +9,7 @@ export async function POST(event) {
 	const { session } = await getSupabase(event);
 	const spaceId = await event.params.id;
 
-	const space = await getSpace(spaceId, session.user.id);
+	const space = await getSpace(spaceId, session.user.id, 'not_created');
 
 	/**
          	const instanceClass =

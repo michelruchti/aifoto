@@ -81,7 +81,7 @@
 					/></svg
 				></a
 			>
-			<a href="/twitter" class="hover:text-gray-600">
+			<a href="https://twitter.com/_heymichel_" class="hover:text-gray-600">
 				<svg
 					stroke="currentColor"
 					fill="currentColor"

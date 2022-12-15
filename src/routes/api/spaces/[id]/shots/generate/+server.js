@@ -11,7 +11,7 @@ export async function POST(event) {
 
 	const spaceId = await event.params.id;
 	const { prompt } = await event.request.json();
-	const space = await getSpace(spaceId, session.user.id);
+	const space = await getSpace(spaceId, session.user.id, 'succeeded');
 	if (space.credits === 0)
 		throw err(401, {
 			message: 'no credits'
