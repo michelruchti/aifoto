@@ -1,6 +1,7 @@
 <script>
 	import { Button, Spinner, Input, Hr, P, Badge as FlowBadge } from 'flowbite-svelte';
-	import { DocumentDuplicate, Sparkles } from 'svelte-heros-v2';
+	import { Sparkles } from 'svelte-heros-v2';
+	import { copy } from 'svelte-copy';
 	import Badge from '$lib/components/Badge.svelte';
 	import { Lightbox } from 'svelte-lightbox';
 	import toast from 'svelte-french-toast';
@@ -24,7 +25,7 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				prompt
+				prompt: prompt
 			})
 		});
 
@@ -142,7 +143,7 @@
 
 						<div class="w-full flex flex-col justify-between">
 							<div>
-								<p class="font-semibold mb-1">
+								<p class=" mb-1">
 									{shot.prompt}
 								</p>
 								<!-- <span> <DocumentDuplicate class="w-4 h-4 " /></span>-->
@@ -150,11 +151,12 @@
 
 							<div class="flex justify-between">
 								<Badge time={shot.created_at} />
-								<div class="flex space-x-2">
-									<FlowBadge color="dark">Copy prompt</FlowBadge><FlowBadge color="dark"
-										>Rrecreate</FlowBadge
-									>
-								</div>
+
+								<button
+									use:copy={shot.prompt}
+									on:svelte-copy={(event) => toast.success('Prompt copied to clipboard')}
+									><FlowBadge color="dark">Copy prompt</FlowBadge></button
+								>
 							</div>
 						</div>
 					</div>
