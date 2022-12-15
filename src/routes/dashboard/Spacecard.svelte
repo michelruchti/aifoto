@@ -86,11 +86,13 @@
 		{/if}
 
 		<div class="flex mb-5 mx-auto">
-			{#each space.image_urls as image}
-				<Avatar
-					src="{PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/{image}"
-					stacked={space.image_urls.length > 1}
-				/>
+			{#each space.image_urls as image, i}
+				{#if i < 5}
+					<Avatar
+						src="{PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/{image}"
+						stacked={space.image_urls.length > 1}
+					/>
+				{/if}
 			{/each}
 		</div>
 	</div>

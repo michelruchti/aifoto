@@ -38,20 +38,21 @@
 	</p>
 </div>
 <span class="text-lg font-medium mt-4">Your Model is ready to be trained!</span>
-<ul class="mt-6 text-left w-7/12 mx-auto">
-	<li class="flex items-center space-x-2">
-		<CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /><span>
+<ul class="mt-6 text-left w-full md:w-7/12 mx-auto">
+	<li class="flex items-center space-x-2 mb-2">
+		<div><CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /></div>
+		<span>
 			<b>1</b> Space with a
 			<strong>custom trained model</strong>
 		</span>
 	</li>
-	<li class="flex space-x-2 items-center">
-		<CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /><span>
-			<strong>100</strong> images generation (512x512 resolution)</span
-		>
+	<li class="flex space-x-2 items-center mb-2">
+		<div><CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /></div>
+		<span> <strong>100</strong> images generation (512x512 resolution)</span>
 	</li>
-	<li class="flex space-x-2 items-center">
-		<CheckBadge variation="solid" class="text-lime-500 w-5 h-5" />
+	<li class="flex space-x-2 items-center ">
+		<div><CheckBadge variation="solid" class="text-lime-500 w-5 h-5" /></div>
+
 		<span>Your Space will be deleted 24 hours after your credits are exhausted</span>
 	</li>
 </ul>

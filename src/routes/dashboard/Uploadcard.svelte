@@ -77,7 +77,7 @@
 		} catch (error) {
 			toast.error('Something went wrong');
 		} finally {
-			loading = false;
+			state = 'upload';
 		}
 	};
 </script>
@@ -107,7 +107,7 @@
 		<p class="mb-2 text-2xl text-gray-700 dark:text-gray-400">
 			<span class="font-semibold ">Click to upload</span> or drag and drop
 		</p>
-		<p class="text-gray-500 dark:text-gray-400">
+		<p class="text-gray-500 dark:text-gray-400 text-center">
 			Better with different angles: Face and right/left profiles
 		</p>
 	</Dropzone>
